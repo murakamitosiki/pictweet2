@@ -1,0 +1,25 @@
+<%= form_with(url: tweets_searches_path, local: true, method: :get, class: "search-form") do |form| %>
+  <%= form.text_field :keywords, placeholder: "投稿を検索する", class: "search-input" %>
+  <%= form.submit "検索", class: "search-btn" %>
+<% end %>
+<div class="contents row">
+  <% @tweets.each do |tweet| %>
+    <%= render partial: "tweet", locals: { tweet: tweet } %>
+  <% end %>
+  <%= paginate(@tweets) %>
+</div>
+
+
+<%# @tweets = [1, 8 , 9, 10]
+.each メソッドは配列の中身の数だけ繰り返す。
+
+|tweet| ブロック変数は中身のデータを表す。
+
+locals: { tweet: tweet}ここの右側は、|tweet|を表している。
+
+
+くりかえすたび、中身が変わる
+
+
+＠tweetsはインスタん変数、アクションに対応したビューで使うことができる。
+今回の場合、違うビューで使いたいため、インスタンス変数から locals: {tweet: tweet} 左側のtweetに入れ替えている。 %>
